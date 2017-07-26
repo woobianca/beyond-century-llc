@@ -40,7 +40,8 @@
 }
 
 .pageContent {
-  margin: 450px auto;
+  margin-top: 450px;
+  margin-bottom: 100px;
 }
 
 .body {
