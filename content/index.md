@@ -1,8 +1,6 @@
 ---
 title: Beyond Century LLC
 layout: Homepage
-hero: https://farm4.staticflickr.com/3949/15589950511_3675b15e59_k.jpg
-# hero credit: https://www.flickr.com/photos/pslee999/15589950511/
 ---
 
 Beyond Century Consulting LLC is a full-service consulting firm, has experienced expertise to a variety of industries and transactions types from small private company to financings and large corporate mergers internationwide. 
