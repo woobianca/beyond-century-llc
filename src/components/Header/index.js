@@ -19,13 +19,13 @@ const Header = () => (
         </Link>
         <Link
           className={ styles.link }
-          to={ "/members" }
+          to={ "/members/" }
         >
           { "Who We Are" }
         </Link>
         <Link
           className={ styles.link }
-          to={ "/experience" }
+          to={ "/experience/" }
         >
           { "Industry Experience" }
         </Link>
