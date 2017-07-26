@@ -8,7 +8,12 @@ import styles from "./index.css"
 const Header = () => (
   <header className={ styles.header }>
     <nav className={ styles.nav }>
-    <img className={ styles.logo} src={ logo } width="160" height="60"/>
+      <Link
+        className={ styles.link }
+        to={ "/" }
+      >
+        <img className={ styles.logo} src={ logo } width="160" height="60"/>
+      </Link>
 
       <div className={ styles.navPart1 }>
         <Link
