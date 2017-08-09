@@ -39,7 +39,7 @@
   width: 100%;
   height: 120px;
   border-top: 5px solid var(--colorGold);
-  border-bottom: 3px solid var(--colorSecondary)
+  border-bottom: 2px solid var(--colorSecondary)
 }
 
 .navPart1,

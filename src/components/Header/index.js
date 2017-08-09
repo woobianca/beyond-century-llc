@@ -12,7 +12,7 @@ const Header = () => (
         className={ styles.link }
         to={ "/" }
       >
-        <img className={ styles.logo} src={ logo } width="160" height="60"/>
+        <img className={ styles.logo} src={ logo } width="200" height="80"/>
       </Link>
 
       <div className={ styles.navPart1 }>
