@@ -10,17 +10,6 @@ const Footer = () => (
     Diamond Bar, CA 91765  
     | 909.839.6788
     </p>
-    <p>
-      <a
-        href={ process.env.PHENOMIC_HOMEPAGE }
-        className={ styles.phenomicReference }
-      >
-        { "Website generated with " }
-        <span className={ styles.phenomicReferenceName }>
-          {  `<${ process.env.PHENOMIC_NAME} />` }
-        </span>
-      </a>
-    </p>
   </footer>
 )
 

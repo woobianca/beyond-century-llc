@@ -34,6 +34,12 @@ const Header = () => (
         >
           { "Industry Experience" }
         </Link>
+        <Link
+          className={ styles.link }
+          to={ "/careers/" }
+        >
+          { "Careers" }
+        </Link>
       </div>
     </nav>
     <img className={ styles.wallpaper} src={ wallpaper }/>
