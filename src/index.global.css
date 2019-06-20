@@ -78,7 +78,7 @@ body {
 
 /* minimal styling, prefer removing this and use local styles */
 a {
-  color: inherit;
+  color: var(--colorRed);
   text-decoration: none;
 
   &:hover {
