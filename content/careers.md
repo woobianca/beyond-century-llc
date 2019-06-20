@@ -2,7 +2,11 @@
 title: Careers
 ---
 
-### Job Description  
+<h3>Accountant</h3>
+
+<small>*Posted June 20, 2019*</small>
+
+#### Job Description
 
 1. Prepare and support the establishment of accounting systems, budgeting and cash flow forecasting.
 
@@ -26,10 +30,9 @@ title: Careers
 
 11. Implement measures to test the accuracy of bookkeeping records, monitor the financial progress of clients’ business and deter fraud.
 
- 
+<br  />
+#### Minimum Requirements
 
-<br />
-### Minimum Requirements  
 1. Master’s degree in Accounting or related.
 
 2. At least six months of experience as an accountant.
@@ -40,5 +43,5 @@ title: Careers
 
 5. Excellent communication, interpersonal, and analytic skills.
 
-<br />
-*Email resume to <rchoy@beyondcenturyllc.com>*
+<br  />
+*Please email your resume to <rchoy@beyondcenturyllc.com>*
