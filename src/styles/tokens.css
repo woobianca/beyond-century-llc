@@ -1,0 +1,20 @@
+:root {
+  --paper: #f6f2ea;
+  --paper-2: #ece5d6;
+  --ink: #14213a;
+  --mute: #5d6577;
+  --rule: #cfc6b3;
+  --accent: #96652f;
+
+  --serif-en: 'Newsreader', 'Noto Serif SC', 'Songti SC', SimSun, Georgia, serif;
+  --serif-zh: 'Noto Serif SC', 'Newsreader', 'Songti SC', SimSun, Georgia, serif;
+  --sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+
+  --wrap: 1180px;
+  --gutter: 40px;
+  --section: 88px;
+}
+
+@media (max-width: 860px) {
+  :root { --gutter: 20px; --section: 56px; }
+}

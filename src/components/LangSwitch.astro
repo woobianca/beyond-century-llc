@@ -1,0 +1,10 @@
+---
+import { localePath, otherLocale, type Locale } from '../i18n/locales';
+
+interface Props { locale: Locale; path: string; class?: string }
+const { locale, path, class: cls = 'lang' } = Astro.props;
+const target = otherLocale(locale);
+---
+<a class={cls} href={localePath(target, path)} hreflang={target === 'zh' ? 'zh-Hans' : 'en'} lang={target === 'zh' ? 'zh-Hans' : 'en'}>
+  {target === 'zh' ? '中文' : 'English'}
+</a>
