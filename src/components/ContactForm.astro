@@ -1,0 +1,49 @@
+---
+/* The only file with host-specific form behavior (Netlify Forms). To move hosts, change this file. */
+import { getCopy } from '../i18n/copy';
+import { localePath, type Locale } from '../i18n/locales';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const f = getCopy(locale).contact.form;
+---
+<form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action={localePath(locale, 'thanks')}>
+  <input type="hidden" name="form-name" value="contact" />
+  <input type="hidden" name="locale" value={locale} />
+  <p class="hp" aria-hidden="true">
+    <label>Don’t fill this out if you’re human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+  <div class="row2">
+    <div class="field">
+      <label for="cf-name">{f.name}</label>
+      <input id="cf-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="cf-phone">{f.phone}</label>
+      <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+    </div>
+  </div>
+  <div class="field">
+    <label for="cf-email">{f.email}</label>
+    <input id="cf-email" name="email" type="email" autocomplete="email" required />
+  </div>
+  <div class="field">
+    <label for="cf-message">{f.message}</label>
+    <textarea id="cf-message" name="message" rows="6" required></textarea>
+  </div>
+  <button class="btn" type="submit">{f.submit}</button>
+</form>
+
+<style>
+  .form { display: grid; gap: 22px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .field { display: grid; gap: 8px; }
+  label { font-size: 13px; letter-spacing: .06em; color: var(--mute); }
+  input, textarea { font: inherit; font-size: 16px; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 0; padding: 12px 14px; transition: border-color .15s ease; }
+  input:hover, textarea:hover { border-color: var(--mute); }
+  input:focus-visible, textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: 0; border-color: var(--ink); }
+  textarea { resize: vertical; }
+  .btn { justify-self: start; }
+  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  @media (max-width: 860px) { .row2 { grid-template-columns: 1fr; } }
+</style>

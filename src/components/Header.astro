@@ -1,0 +1,66 @@
+---
+import { getCopy } from '../i18n/copy';
+import { localePath, type Locale } from '../i18n/locales';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props { locale: Locale; path: string }
+const { locale, path } = Astro.props;
+const c = getCopy(locale);
+const items = [
+  { key: '', label: c.nav.home },
+  { key: 'services', label: c.nav.services },
+  { key: 'about', label: c.nav.about },
+  { key: 'people', label: c.nav.people },
+  { key: 'contact', label: c.nav.contact },
+];
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="mark" href={localePath(locale)}>
+      <span class="mark-main">{c.brand.wordmark}</span>
+      <span class="mark-sub">{c.brand.wordmarkSub}</span>
+    </a>
+    <nav class="primary" aria-label={c.nav.menu}>
+      {items.map((i) => (
+        <a href={localePath(locale, i.key)} aria-current={i.key === path ? 'page' : undefined}>{i.label}</a>
+      ))}
+    </nav>
+    <LangSwitch locale={locale} path={path} />
+    <details class="menu">
+      <summary>{c.nav.menu}</summary>
+      <nav class="mobile" aria-label={c.nav.menu}>
+        {items.map((i) => (
+          <a href={localePath(locale, i.key)} aria-current={i.key === path ? 'page' : undefined}>{i.label}</a>
+        ))}
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--rule); }
+  .bar { display: flex; align-items: center; gap: 32px; padding-top: 24px; padding-bottom: 24px; }
+  .mark { display: flex; align-items: baseline; gap: 10px; text-decoration: none; margin-right: auto; }
+  .mark-main { font-family: var(--serif-head); font-size: 21px; font-weight: 600; letter-spacing: .02em; }
+  :lang(en) .mark-main { font-weight: 500; letter-spacing: .01em; }
+  .mark-sub { font-family: var(--serif-en); font-size: 14px; color: var(--mute); letter-spacing: .04em; }
+  .primary { display: flex; gap: 30px; font-size: 15px; }
+  .primary a, .mobile a { text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: border-color .15s ease; }
+  .primary a:hover, .primary a[aria-current='page'] { border-color: var(--ink); }
+  .site-header :global(a.lang) { font-size: 13px; text-decoration: none; border: 1px solid var(--rule); padding: 5px 12px; border-radius: 99px; transition: border-color .15s ease; }
+  .site-header :global(a.lang:hover) { border-color: var(--ink); }
+  .menu { display: none; }
+  @media (max-width: 860px) {
+    .bar { gap: 14px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; }
+    .primary { display: none; }
+    .menu { display: block; }
+    .menu summary { list-style: none; cursor: pointer; font-size: 14px; border: 1px solid var(--ink); padding: 5px 12px; }
+    .menu summary::-webkit-details-marker { display: none; }
+    .menu[open] summary { background: var(--ink); color: var(--paper); }
+    .mobile { position: absolute; top: 100%; left: 0; right: 0; border-top: 1px solid var(--rule); background: var(--paper); border-bottom: 1px solid var(--rule); padding: 8px var(--gutter) 16px; display: flex; flex-direction: column; z-index: 5; }
+    .mobile a { padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 17px; }
+    .mobile a:last-child { border-bottom: 0; }
+    .site-header { position: relative; }
+    .mark-sub { display: none; }
+  }
+</style>

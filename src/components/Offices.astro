@@ -1,0 +1,25 @@
+---
+import type { ContactFacts } from '../data/types';
+import { getCopy } from '../i18n/copy';
+import type { Locale } from '../i18n/locales';
+
+interface Props { contact: ContactFacts; locale: Locale }
+const { contact, locale } = Astro.props;
+const o = getCopy(locale).contact.offices;
+const tel = contact.phone[locale].replace(/[^\d+]/g, '');
+---
+<dl class="offices">
+  <div><dt>{o.us}</dt><dd>{contact.usAddress[locale]}</dd></div>
+  <div><dt>{o.cn}</dt><dd>{contact.cnAddress[locale]}</dd></div>
+  <div><dt>{o.phone}</dt><dd><a href={`tel:${tel}`}>{contact.phone[locale]}</a></dd></div>
+  <div><dt>{o.email}</dt><dd><a href={`mailto:${contact.email[locale]}`}>{contact.email[locale]}</a></dd></div>
+</dl>
+
+<style>
+  .offices { margin: 0; border-top: 2px solid var(--ink); }
+  .offices > div { padding: 20px 0; border-bottom: 1px solid var(--rule); }
+  dt { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  dd { margin: 0; font-family: var(--serif); font-size: 17px; line-height: 1.6; }
+  a { text-decoration: none; border-bottom: 1px solid var(--rule); }
+  a:hover { border-color: var(--ink); }
+</style>

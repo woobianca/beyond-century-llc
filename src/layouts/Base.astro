@@ -1,0 +1,43 @@
+---
+// Self-hosted fonts, Latin subsets only, plus Noto Serif SC 600 for Chinese headings.
+// Chinese body and UI text use the reader's system fonts (see tokens.css).
+import '@fontsource/noto-serif-sc/chinese-simplified-600.css';
+import '@fontsource/newsreader/latin-400.css';
+import '@fontsource/newsreader/latin-400-italic.css';
+import '@fontsource/newsreader/latin-500.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getCopy, type PageKey } from '../i18n/copy';
+import { HTML_LANG, type Locale } from '../i18n/locales';
+import JsonLd from '../components/JsonLd.astro';
+import { loadSiteData } from '../data/site-data';
+import { organization } from '../data/structured-data';
+
+interface Props { locale: Locale; page: PageKey; path: string; noindex?: boolean }
+const { locale, page, path, noindex } = Astro.props;
+const meta = getCopy(locale).meta[page];
+const org = organization(await loadSiteData(), locale);
+---
+<!doctype html>
+<html lang={HTML_LANG[locale]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <Seo locale={locale} path={path} title={meta.title} description={meta.description} noindex={noindex} />
+    <JsonLd data={org} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">{locale === 'zh' ? '跳到主要内容' : 'Skip to content'}</a>
+    <Header locale={locale} path={path} />
+    <main id="main"><slot /></main>
+    <Footer locale={locale} path={path} />
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCopy } from '../../i18n/copy';
+import { localePath, staticLocalePaths, type Locale } from '../../i18n/locales';
+
+export function getStaticPaths() {
+  return staticLocalePaths();
+}
+const locale = Astro.params.locale as Locale;
+const c = getCopy(locale);
+---
+<Base locale={locale} page="thanks" path="thanks" noindex>
+  <section class="wrap section">
+    <h1 class="display">{c.thanks.heading}</h1>
+    <p class="lede body">{c.thanks.body}</p>
+    <a class="textlink" href={localePath(locale)}>{c.thanks.back}</a>
+  </section>
+</Base>
+
+<style>
+  .body { margin: 24px 0 36px; }
+</style>

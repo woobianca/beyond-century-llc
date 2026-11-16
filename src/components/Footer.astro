@@ -1,0 +1,55 @@
+---
+import { getCopy } from '../i18n/copy';
+import { localePath, type Locale } from '../i18n/locales';
+import { loadSiteData } from '../data/site-data';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props { locale: Locale; path: string }
+const { locale, path } = Astro.props;
+const c = getCopy(locale);
+const { contact, jobs } = await loadSiteData();
+const year = new Date().getFullYear();
+const tel = contact.phone[locale].replace(/[^\d+]/g, '');
+---
+<footer class="site-footer band">
+  <div class="wrap grid">
+    <div>
+      <div class="mark">{c.brand.wordmark}</div>
+      <p class="muted small">{c.brand.legalName}</p>
+    </div>
+    <div>
+      <div class="label">{c.contact.offices.us}</div>
+      <p>{contact.usAddress[locale]}</p>
+    </div>
+    <div>
+      <div class="label">{c.contact.offices.cn}</div>
+      <p>{contact.cnAddress[locale]}</p>
+    </div>
+    <div>
+      <p><a href={`tel:${tel}`}>{contact.phone[locale]}</a></p>
+      <p><a href={`mailto:${contact.email[locale]}`}>{contact.email[locale]}</a></p>
+    </div>
+  </div>
+  <div class="wrap base">
+    <span>© {year} {c.brand.legalName} {c.footer.rights}</span>
+    <span class="links">
+      {jobs.length > 0 && <a href={`${localePath(locale, 'people')}#join`}>{c.nav.careers}</a>}
+      <LangSwitch locale={locale} path={path} class="lang-footer" />
+    </span>
+  </div>
+</footer>
+
+<style>
+  .site-footer { margin-top: var(--section); font-size: 14px; }
+  .grid { display: grid; grid-template-columns: 1.3fr 1.2fr 1.2fr 1fr; gap: 40px; padding-top: 56px; padding-bottom: 40px; }
+  .mark { font-family: var(--serif-head); font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+  :lang(en) .mark { font-weight: 500; }
+  .label { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .small { font-size: 13px; }
+  p { line-height: 1.7; }
+  a { text-decoration: none; border-bottom: 1px solid var(--rule); }
+  a:hover { border-color: var(--ink); }
+  .base { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 18px; padding-bottom: 28px; color: var(--mute); font-size: 13px; }
+  .links { display: flex; gap: 20px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; gap: 22px; } }
+</style>

@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import ServiceRows from '../../components/ServiceRows.astro';
+import QuoteBand from '../../components/QuoteBand.astro';
+import { getCopy } from '../../i18n/copy';
+import { localePath, staticLocalePaths, type Locale } from '../../i18n/locales';
+
+export function getStaticPaths() {
+  return staticLocalePaths();
+}
+const locale = Astro.params.locale as Locale;
+const c = getCopy(locale);
+---
+<Base locale={locale} page="home" path="">
+  <Hero locale={locale} />
+  <section class="wrap section ruled split">
+    <div>
+      <h2 class="h2">{c.home.servicesHeading}</h2>
+      <p class="muted sub">{c.home.servicesSub}</p>
+    </div>
+    <ServiceRows locale={locale} />
+  </section>
+  <QuoteBand locale={locale} />
+  <section class="wrap section prompt">
+    <p class="lede">{c.home.contactPrompt}</p>
+    <a class="btn" href={localePath(locale, 'contact')}>{c.home.ctaPrimary}</a>
+  </section>
+</Base>
+
+<style>
+  .sub { margin-top: 14px; font-size: 16px; }
+  .prompt { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .prompt .lede { color: var(--ink); font-size: 22px; max-width: 30em; }
+</style>

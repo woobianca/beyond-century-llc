@@ -1,6 +1,6 @@
-# node / npm
-node_modules
-*.log
-
-# phenomic build
-dist
+node_modules/
+dist/
+.astro/
+.env
+.superpowers/
+.DS_Store

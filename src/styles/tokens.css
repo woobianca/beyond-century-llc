@@ -1,0 +1,22 @@
+:root {
+  --paper: #f6f2ea;
+  --paper-2: #ece5d6;
+  --ink: #14213a;
+  --mute: #5d6577;
+  --rule: #cfc6b3;
+  --accent: #96652f;
+
+  --serif-en: 'Newsreader', 'Noto Serif SC', 'Songti SC', SimSun, Georgia, serif;
+  /* Noto Serif SC is loaded at 600 only: use it for Chinese headings, system serifs for Chinese body text. */
+  --serif-zh: 'Newsreader', 'Noto Serif SC', 'Songti SC', 'Noto Serif CJK SC', 'Source Han Serif SC', SimSun, Georgia, serif;
+  --serif-zh-body: 'Newsreader', 'Songti SC', 'STSong', 'Noto Serif CJK SC', 'Source Han Serif SC', SimSun, Georgia, serif;
+  --sans: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', system-ui, sans-serif;
+
+  --wrap: 1180px;
+  --gutter: 40px;
+  --section: 88px;
+}
+
+@media (max-width: 860px) {
+  :root { --gutter: 20px; --section: 56px; }
+}

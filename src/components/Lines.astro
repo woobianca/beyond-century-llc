@@ -1,0 +1,6 @@
+---
+/** Renders text with "\n" as line breaks. */
+interface Props { text: string }
+const lines = Astro.props.text.split('\n');
+---
+{lines.map((line, i) => (i > 0 ? <Fragment><br />{line}</Fragment> : line))}

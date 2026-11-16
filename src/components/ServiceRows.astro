@@ -1,0 +1,36 @@
+---
+import { getCopy } from '../i18n/copy';
+import { localePath, type Locale } from '../i18n/locales';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const c = getCopy(locale);
+---
+<ol class="rows">
+  {c.services.items.map((s, i) => (
+    <li>
+      <a class="row" href={`${localePath(locale, 'services')}#${s.id}`}>
+        <span class="num">{String(i + 1).padStart(2, '0')}</span>
+        <span class="h3 title">{s.title}</span>
+        <span class="summary">{s.summary}</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  .row { display: grid; grid-template-columns: 56px 1fr 2fr 24px; gap: 20px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid var(--rule); text-decoration: none; transition: background .15s ease; }
+  .row:hover .title { color: var(--accent); }
+  .row:hover .arrow { transform: translateX(4px); }
+  .num { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-size: 17px; }
+  .title { font-family: var(--serif-head); transition: color .15s ease; }
+  .summary { font-size: 14.5px; line-height: 1.7; color: var(--mute); }
+  .arrow { transition: transform .15s ease; }
+  @media (max-width: 860px) {
+    .row { grid-template-columns: 40px 1fr; row-gap: 6px; }
+    .summary { grid-column: 2; }
+    .arrow { display: none; }
+  }
+</style>
