@@ -17,8 +17,7 @@ const items = [
 <header class="site-header">
   <div class="wrap bar">
     <a class="mark" href={localePath(locale)}>
-      <span class="mark-main">{c.brand.wordmark}</span>
-      <span class="mark-sub">{c.brand.wordmarkSub}</span>
+      <img src="/img/logo-horizontal.svg" alt={c.brand.wordmark} width="1922" height="343" />
     </a>
     <nav class="primary" aria-label={c.nav.menu}>
       {items.map((i) => (
@@ -40,16 +39,16 @@ const items = [
 <style>
   .site-header { border-bottom: 1px solid var(--rule); }
   .bar { display: flex; align-items: center; gap: 32px; padding-top: 24px; padding-bottom: 24px; }
-  .mark { display: flex; align-items: baseline; gap: 10px; text-decoration: none; margin-right: auto; }
-  .mark-main { font-family: var(--serif-head); font-size: 21px; font-weight: 600; letter-spacing: .02em; }
-  :lang(en) .mark-main { font-weight: 500; letter-spacing: .01em; }
-  .mark-sub { font-family: var(--serif-en); font-size: 14px; color: var(--mute); letter-spacing: .04em; }
-  .primary { display: flex; gap: 30px; font-size: 15px; }
+  /* The logo is the only thing allowed to shrink, so links and the language switch never wrap. */
+  .mark { display: flex; align-items: center; text-decoration: none; margin-right: auto; min-width: 0; flex: 0 1 auto; }
+  .mark img { display: block; width: 302px; max-width: 100%; height: auto; }
+  .primary { display: flex; gap: 30px; font-size: 15px; flex-shrink: 0; white-space: nowrap; }
   .primary a, .mobile a { text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: border-color .15s ease; }
   .primary a:hover, .primary a[aria-current='page'] { border-color: var(--ink); }
-  .site-header :global(a.lang) { font-size: 13px; text-decoration: none; border: 1px solid var(--rule); padding: 5px 12px; border-radius: 99px; transition: border-color .15s ease; }
+  .site-header :global(a.lang) { flex-shrink: 0; white-space: nowrap; font-size: 13px; text-decoration: none; border: 1px solid var(--rule); padding: 5px 12px; border-radius: 99px; transition: border-color .15s ease; }
   .site-header :global(a.lang:hover) { border-color: var(--ink); }
   .menu { display: none; }
+  @media (max-width: 1080px) { .bar { gap: 24px; } .primary { gap: 22px; } }
   @media (max-width: 860px) {
     .bar { gap: 14px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; }
     .primary { display: none; }
@@ -61,6 +60,11 @@ const items = [
     .mobile a { padding: 12px 0; border-bottom: 1px solid var(--rule); font-size: 17px; }
     .mobile a:last-child { border-bottom: 0; }
     .site-header { position: relative; }
-    .mark-sub { display: none; }
+    .mark img { width: auto; height: 30px; }
+  }
+  @media (max-width: 359px) {
+    .bar { gap: 8px; }
+    .mark img { height: 24px; }
+    .site-header :global(a.lang), .menu summary { padding-left: 9px; padding-right: 9px; }
   }
 </style>

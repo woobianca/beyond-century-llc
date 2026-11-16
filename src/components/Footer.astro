@@ -14,7 +14,7 @@ const tel = contact.phone[locale].replace(/[^\d+]/g, '');
 <footer class="site-footer band">
   <div class="wrap grid">
     <div>
-      <div class="mark">{c.brand.wordmark}</div>
+      <img class="mark" src="/img/logo-stacked.svg" alt={c.brand.wordmark} width="1337" height="572" loading="lazy" />
       <p class="muted small">{c.brand.legalName}</p>
     </div>
     <div>
@@ -42,8 +42,7 @@ const tel = contact.phone[locale].replace(/[^\d+]/g, '');
 <style>
   .site-footer { margin-top: var(--section); font-size: 14px; }
   .grid { display: grid; grid-template-columns: 1.3fr 1.2fr 1.2fr 1fr; gap: 40px; padding-top: 56px; padding-bottom: 40px; }
-  .mark { font-family: var(--serif-head); font-size: 20px; font-weight: 600; margin-bottom: 6px; }
-  :lang(en) .mark { font-weight: 500; }
+  .mark { display: block; width: 190px; height: auto; margin-bottom: 12px; }
   .label { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
   .small { font-size: 13px; }
   p { line-height: 1.7; }
