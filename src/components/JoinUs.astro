@@ -1,0 +1,40 @@
+---
+import type { Job } from '../data/types';
+import { getCopy } from '../i18n/copy';
+import type { Locale } from '../i18n/locales';
+
+interface Props { jobs: Job[]; locale: Locale }
+const { jobs, locale } = Astro.props;
+const c = getCopy(locale).people;
+---
+{jobs.length > 0 && (
+  <section id="join" class="band join">
+    <div class="wrap">
+      <p class="eyebrow">{c.joinHeading}</p>
+      <h2 class="h2">{c.joinIntro}</h2>
+      {jobs.map((job) => (
+        <article class="job">
+          <div>
+            <h3 class="h3">{job.title[locale]}</h3>
+            <p class="meta"><span>{c.location}</span> {job.location[locale]}</p>
+          </div>
+          <div class="prose">
+            {job.description[locale].map((p) => <p>{p}</p>)}
+            <p class="apply-label">{c.howToApply}</p>
+            {job.howToApply[locale].map((p) => <p>{p}</p>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .join { padding: 72px 0; margin-top: 24px; scroll-margin-top: 24px; }
+  .job { display: grid; grid-template-columns: 3fr 8fr; gap: 72px; padding: 36px 0; border-bottom: 1px solid var(--rule); }
+  .job:first-of-type { margin-top: 32px; border-top: 1px solid var(--rule); }
+  .meta { margin-top: 10px; font-size: 14px; color: var(--mute); }
+  .meta span { color: var(--accent); margin-right: 6px; }
+  .apply-label { font-family: var(--sans) !important; font-size: 13px !important; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-top: 1.4em !important; }
+  @media (max-width: 860px) { .job { grid-template-columns: 1fr; gap: 16px; } }
+</style>

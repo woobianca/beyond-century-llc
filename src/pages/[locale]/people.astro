@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import JoinUs from '../../components/JoinUs.astro';
+import { loadSiteData } from '../../data/site-data';
+import { getCopy } from '../../i18n/copy';
+import { staticLocalePaths, type Locale } from '../../i18n/locales';
+
+export function getStaticPaths() {
+  return staticLocalePaths();
+}
+const locale = Astro.params.locale as Locale;
+const c = getCopy(locale);
+const { people, jobs } = await loadSiteData();
+---
+<Base locale={locale} page="people" path="people">
+  <header class="wrap page-head">
+    <h1 class="display">{c.people.heading}</h1>
+    <p class="lede">{c.people.intro}</p>
+  </header>
+  <div class="wrap">
+    {people.map((person) => <PersonCard person={person} locale={locale} />)}
+  </div>
+  <JoinUs jobs={jobs} locale={locale} />
+</Base>
+
+<style>
+  .page-head { padding-top: 88px; padding-bottom: 56px; }
+  .page-head .lede { margin-top: 24px; }
+  @media (max-width: 860px) { .page-head { padding-top: 56px; padding-bottom: 32px; } }
+</style>

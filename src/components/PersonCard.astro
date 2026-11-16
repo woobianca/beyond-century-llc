@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import { resolvePhoto } from '../data/photos';
+import type { Person } from '../data/types';
+import type { Locale } from '../i18n/locales';
+
+interface Props { person: Person; locale: Locale }
+const { person, locale } = Astro.props;
+const photo = resolvePhoto(person.photo);
+const name = person.name[locale];
+const initials = name.split(/[\s,]+/).filter((w) => /^[A-Za-z]/.test(w)).slice(0, 2).map((w) => w[0]).join('') || name.slice(0, 1);
+---
+<article class="person">
+  {photo
+    ? <Image src={photo} alt={name} width={480} class="photo" />
+    : <div class="photo placeholder" aria-hidden="true">{initials}</div>}
+  <div>
+    <h2 class="h2">{name}</h2>
+    <p class="title">{person.title[locale]}</p>
+    <div class="prose bio">{person.bio[locale].map((p) => <p>{p}</p>)}</div>
+  </div>
+</article>
+
+<style>
+  .person { display: grid; grid-template-columns: 240px 1fr; gap: 64px; padding: 64px 0; border-top: 1px solid var(--rule); }
+  .photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top; background: var(--paper-2); }
+  .placeholder { display: grid; place-items: center; font-family: var(--serif-en); font-style: italic; font-size: 48px; color: var(--mute); }
+  .title { font-size: 14px; letter-spacing: .06em; color: var(--accent); margin: 8px 0 22px; }
+  @media (max-width: 860px) {
+    .person { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
+    .photo { max-width: 200px; }
+  }
+</style>
