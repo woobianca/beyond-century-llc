@@ -7,11 +7,11 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const f = getCopy(locale).contact.form;
 ---
-<form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="company-site" action={localePath(locale, 'thanks')}>
+<form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action={localePath(locale, 'thanks')}>
   <input type="hidden" name="form-name" value="contact" />
   <input type="hidden" name="locale" value={locale} />
   <p class="hp" aria-hidden="true">
-    <label>Company website <input name="company-site" tabindex="-1" autocomplete="off" /></label>
+    <label>Don’t fill this out if you’re human <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
   </p>
   <div class="row2">
     <div class="field">

@@ -73,6 +73,11 @@ describe('validateSheet', () => {
     expect(problems({ ...base, contact })).toContain('Contact: missing key "email"');
   });
 
+  test('a People tab with nobody shown is a problem', () => {
+    const people = [PEOPLE_HEAD, person('1', 'a', 'no')].join('\n');
+    expect(problems({ ...base, people })).toContain('People: no rows have show = yes');
+  });
+
   test('order must be a number', () => {
     const people = [PEOPLE_HEAD, person('first', 'a', 'yes')].join('\n');
     expect(problems({ ...base, people })).toContain('People row 2: "order" is not a number');

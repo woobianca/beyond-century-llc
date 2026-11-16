@@ -17,7 +17,7 @@ const initials = name.split(/[\s,]+/).filter((w) => /^[A-Za-z]/.test(w)).slice(0
   <div>
     <h2 class="h2">{name}</h2>
     <p class="title">{person.title[locale]}</p>
-    <div class="prose bio">{person.bio[locale].map((p) => <p>{p}</p>)}</div>
+    <div class="prose bio">{person.bio[locale].map((p) => <p class="cell">{p}</p>)}</div>
   </div>
 </article>
 

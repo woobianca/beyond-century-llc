@@ -23,9 +23,17 @@ describe.each(['zh', 'en'] as const)('contact page (%s)', (l) => {
 
   test('form has the agreed field names', () => {
     const names = doc().querySelectorAll('form[name="contact"] [name]').map((e) => e.getAttribute('name'));
-    for (const n of ['name', 'phone', 'email', 'message', 'form-name', 'locale', 'company-site']) expect(names).toContain(n);
+    for (const n of ['name', 'phone', 'email', 'message', 'form-name', 'locale', 'bot-field']) expect(names).toContain(n);
     expect(doc().querySelector('input[name="form-name"]')?.getAttribute('value')).toBe('contact');
     expect(doc().querySelector('input[name="locale"]')?.getAttribute('value')).toBe(l);
+  });
+
+  test('honeypot is not something browser autofill would fill', () => {
+    const form = doc().querySelector('form[name="contact"]')!;
+    expect(form.getAttribute('netlify-honeypot')).toBe('bot-field');
+    const hp = form.querySelector('[name="bot-field"]')!;
+    const label = hp.closest('label')?.text ?? '';
+    expect(`${hp.getAttribute('name')} ${label}`).not.toMatch(/company|organi[sz]ation|website|url|name|email|phone/i);
   });
 
   test('required fields and email type', () => {

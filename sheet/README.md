@@ -30,6 +30,8 @@ Column names in row 1 must stay exactly as below.
 
 Long text: press Ctrl+Enter (Cmd+Enter on Mac) for a new line inside a cell; a blank line starts a new paragraph. No other formatting is supported.
 
+Format the `Contact` value columns as **plain text** (Format → Number → Plain text) so a phone number is never treated as a number.
+
 ## If a publish fails
 
 The site checks the Sheet before publishing. If a column is renamed, a required cell is empty in either language, or the Sheet is no longer shared, the publish stops, the site keeps showing the previous version, and the reason appears in the Netlify deploy log.

@@ -68,6 +68,7 @@ export function validateSheet(raw: RawTabs): SiteData {
       bio: { zh: paragraphs(d.bio_zh), en: paragraphs(d.bio_en) },
     });
   }
+  if (peopleRows && !peopleRows.some(isShown)) problems.push('People: no rows have show = yes');
   people.sort((a, b) => a.order - b.order);
 
   const jobs: Job[] = [];

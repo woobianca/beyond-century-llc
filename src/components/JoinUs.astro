@@ -19,9 +19,9 @@ const c = getCopy(locale).people;
             <p class="meta"><span>{c.location}</span> {job.location[locale]}</p>
           </div>
           <div class="prose">
-            {job.description[locale].map((p) => <p>{p}</p>)}
+            {job.description[locale].map((p) => <p class="cell">{p}</p>)}
             <p class="apply-label">{c.howToApply}</p>
-            {job.howToApply[locale].map((p) => <p>{p}</p>)}
+            {job.howToApply[locale].map((p) => <p class="cell">{p}</p>)}
           </div>
         </article>
       ))}
