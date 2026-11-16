@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import PersonCard from '../../components/PersonCard.astro';
 import JoinUs from '../../components/JoinUs.astro';
 import { loadSiteData } from '../../data/site-data';
+import JsonLd from '../../components/JsonLd.astro';
+import { jobPosting, person } from '../../data/structured-data';
 import { getCopy } from '../../i18n/copy';
 import { staticLocalePaths, type Locale } from '../../i18n/locales';
 
@@ -12,8 +14,11 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const c = getCopy(locale);
 const { people, jobs } = await loadSiteData();
+const today = new Date().toISOString().slice(0, 10);
+const structured = [...people.map((p) => person(p, locale)), ...jobs.map((j) => jobPosting(j, locale, today))];
 ---
 <Base locale={locale} page="people" path="people">
+  <JsonLd slot="head" data={structured} />
   <header class="wrap page-head">
     <h1 class="display">{c.people.heading}</h1>
     <p class="lede">{c.people.intro}</p>

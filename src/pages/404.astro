@@ -1,0 +1,45 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '@fontsource/noto-serif-sc/600.css';
+import '@fontsource/newsreader/400.css';
+import '@fontsource/inter/400.css';
+import { getCopy } from '../i18n/copy';
+import { localePath } from '../i18n/locales';
+const zh = getCopy('zh');
+const en = getCopy('en');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{en.meta.notFound.title}</title>
+  </head>
+  <body>
+    <main class="wrap section nf">
+      <p class="eyebrow">404</p>
+      <div class="cols">
+        <div lang="zh-Hans">
+          <h1 class="h2">{zh.notFound.heading}</h1>
+          <p class="lede">{zh.notFound.body}</p>
+          <a class="textlink" href={localePath('zh')}>{zh.thanks.back}</a>
+        </div>
+        <div lang="en">
+          <h2 class="h2">{en.notFound.heading}</h2>
+          <p class="lede">{en.notFound.body}</p>
+          <a class="textlink" href={localePath('en')}>{en.thanks.back}</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .nf { padding-top: 120px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; border-top: 2px solid var(--ink); padding-top: 32px; }
+  .lede { margin: 16px 0 28px; }
+  @media (max-width: 860px) { .cols { grid-template-columns: 1fr; gap: 48px; } }
+</style>

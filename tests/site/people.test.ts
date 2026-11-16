@@ -39,7 +39,11 @@ describe('people page with hostile Sheet input', () => {
     const doc = (await buildSite('fixtures/hostile')).page('/en/people/');
     const first = doc.querySelectorAll('.person')[0];
     expect(first.text).toContain('Tom & Jerry <script>alert(1)</script> <b>bold</b>');
-    expect(doc.querySelectorAll('script').some((s) => s.text.includes('alert(1)'))).toBe(false);
+    const scripts = doc.querySelectorAll('script');
+    const executable = scripts.filter((s) => s.getAttribute('type') !== 'application/ld+json');
+    expect(executable.some((s) => s.text.includes('alert(1)'))).toBe(false);
+    // Structured data may carry the text, but must never contain a raw "<" that could close the element.
+    for (const s of scripts.filter((s) => s.getAttribute('type') === 'application/ld+json')) expect(s.text).not.toContain('<');
     expect(first.querySelector('b')).toBeNull();
   });
 
