@@ -1,0 +1,29 @@
+---
+import { getCopy } from '../i18n/copy';
+import { localePath, type Locale } from '../i18n/locales';
+import FactColumn from './FactColumn.astro';
+import Lines from './Lines.astro';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const h = getCopy(locale).home;
+---
+<section class="wrap hero">
+  <div>
+    <p class="eyebrow">{h.eyebrow}</p>
+    <h1 class="display"><Lines text={h.headline} /></h1>
+    <p class="lede">{h.lede}</p>
+    <div class="cta">
+      <a class="btn" href={localePath(locale, 'contact')}>{h.ctaPrimary}</a>
+      <a class="textlink" href={localePath(locale, 'services')}>{h.ctaSecondary}</a>
+    </div>
+  </div>
+  <FactColumn facts={h.facts} />
+</section>
+
+<style>
+  .hero { display: grid; grid-template-columns: 7fr 4fr; gap: 72px; padding-top: 96px; padding-bottom: 88px; }
+  .lede { margin-top: 28px; }
+  .cta { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
+  @media (max-width: 860px) { .hero { grid-template-columns: 1fr; gap: 48px; padding-top: 56px; padding-bottom: 56px; } }
+</style>

@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCopy } from '../../i18n/copy';
+import { localePath, staticLocalePaths, type Locale } from '../../i18n/locales';
+
+export function getStaticPaths() {
+  return staticLocalePaths();
+}
+const locale = Astro.params.locale as Locale;
+const c = getCopy(locale);
+---
+<Base locale={locale} page="about" path="about">
+  <header class="wrap page-head">
+    <h1 class="display">{c.about.heading}</h1>
+  </header>
+  {c.about.sections.map((s) => (
+    <section class="wrap section ruled split">
+      <h2 class="h2">{s.heading}</h2>
+      <div class="prose">{s.body.map((p) => <p>{p}</p>)}</div>
+    </section>
+  ))}
+  <section class="wrap section ruled cta">
+    <a class="btn" href={localePath(locale, 'contact')}>{c.home.ctaPrimary}</a>
+    <a class="textlink" href={localePath(locale, 'people')}>{c.nav.people}</a>
+  </section>
+</Base>
+
+<style>
+  .page-head { padding-top: 88px; padding-bottom: 72px; }
+  .cta { display: flex; gap: 26px; align-items: center; }
+  @media (max-width: 860px) { .page-head { padding-top: 56px; padding-bottom: 48px; } }
+</style>
